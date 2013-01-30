@@ -115,6 +115,18 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" No annoying error sounds
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Very magic swith for regular expressions, i.e. use perl syntax
+set magic
+
+" Spell Checking
+map <leader>ss :setlocal spell!<cr>
+
 
 " Install any plugin into a .vim/bundle/plugin-name/ folder
 call pathogen#infect()
