@@ -11,9 +11,9 @@ set foldmethod=expr
 set foldexpr=PythonFoldExpr(v:lnum)
 set foldtext=PythonFoldText()
 
-map <buffer> <space>  za
-map <buffer> F :call ToggleFold()<CR>
-let b:folded = 1
+map <silent><buffer> <space>  za
+map <silent><buffer> <leader>f :call ToggleFold()<CR>
+let b:folded = 0
 
 function! ToggleFold()
     if( b:folded == 0 )

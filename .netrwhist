@@ -1,7 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/chris/WebAppProjects/microblog/microblog/settings'
-let g:netrw_dirhist_2='/home/chris/bin'
-let g:netrw_dirhist_3='/home/chris/programming/mtbot'
-let g:netrw_dirhist_4='/home/chris/programming/mtbot/lib'
-let g:netrw_dirhist_5='/home/chris/programming/mtbot'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/chris/programming'
+let g:netrw_dirhist_2='/home/chris/programming/mtbot'
+let g:netrw_dirhist_3='/home/chris/programming/mtbot/lib'
