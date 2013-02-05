@@ -1,3 +1,5 @@
+python from powerline.bindings.vim import source_plugin; source_plugin()
+
 " Scroll offset
 set scrolloff=5
 
@@ -55,9 +57,6 @@ nmap :W :w
 "Commands to edit .vimrc
 nmap <leader>ev :e $MYVIMRC<CR>
 nmap <leader>sv :so $MYVIMRC<CR>
-
-"use symbols in powerline
-let g:Powerline_symbols = 'unicode'
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
