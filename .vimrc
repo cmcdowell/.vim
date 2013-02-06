@@ -14,6 +14,10 @@ set hidden " Easier to use hidden buffer
 " Rebind <Leader> key
 let mapleader = ","
 
+" More useful enter key bindings in normal mode
+nmap <CR> o<esc>
+nmap <S-CR> O<esc>
+
 " Fix Y
 map Y y$
 
@@ -64,8 +68,6 @@ vnoremap <Leader>s :sort<CR>
 " easier moving of code blocks
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
-
-
 
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
@@ -142,7 +144,10 @@ set laststatus=2
 
 
 " Settings for ctrlp
+nmap <C-b> :CtrlPBuffer<CR>
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_max_height = 30
+set wildignore+=*/htmlcov/*
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
