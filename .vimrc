@@ -135,6 +135,28 @@ filetype off
 syntax on
 filetype plugin indent on
 
+" show trailing whitespace
+function AddWhiteSpaceMarker()
+    let l:winview = winsaveview()
+    silent! %s/\v(\s+$)/\1¬
+    match ErrorMsg /\v\s+¬$/
+    call winrestview(l:winview)
+endfunction
+
+function RemoveWhiteSpaceMarker()
+    let l:winview = winsaveview()
+    silent! %s/\v(\s+)¬$/\1
+    call winrestview(l:winview)
+endfunction
+
+augroup Whitespace
+    autocmd!
+    autocmd VimEnter * call AddWhiteSpaceMarker()
+    autocmd InsertLeave * call AddWhiteSpaceMarker()
+    autocmd BufWrite * call RemoveWhiteSpaceMarker()
+    autocmd BufWritePost * call AddWhiteSpaceMarker()
+augroup END
+
 
 " =======================================================================
 
