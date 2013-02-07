@@ -1,5 +1,7 @@
 python from powerline.bindings.vim import source_plugin; source_plugin()
 
+
+
 " Scroll offset
 set scrolloff=5
 
@@ -73,7 +75,7 @@ vnoremap > >gv " better indentation
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-color wombat256mod
+color jellybeans
 
 
 
@@ -82,8 +84,11 @@ set number " show line numbers
 set tw=79 " width of document (used by gd)
 set nowrap " don't automatically wrap on load
 set fo-=t " don't automatically wrap text when typing
-let &colorcolumn=join(range(1,80),",")
 
+let &colorcolumn=join(range(81,1000),",")
+augroup ColorCol
+    autocmd ColorScheme * highlight ColorColumn ctermbg=000000 guibg=000000
+augroup END
 
 " easier formatting of paragraphs
 vmap Q gq
@@ -151,6 +156,7 @@ endfunction
 
 augroup Whitespace
     autocmd!
+    autocmd BufEnter * call AddWhiteSpaceMarker()
     autocmd VimEnter * call AddWhiteSpaceMarker()
     autocmd InsertLeave * call AddWhiteSpaceMarker()
     autocmd BufWrite * call RemoveWhiteSpaceMarker()
