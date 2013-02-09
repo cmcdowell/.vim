@@ -17,8 +17,8 @@ set hidden " Easier to use hidden buffer
 let mapleader = ","
 
 " More useful enter key bindings in normal mode
-nmap <CR> o<esc>
-nmap <S-CR> O<esc>
+" nmap <CR> o<esc>
+" nmap <S-CR> O<esc>
 
 " Fix Y
 map Y y$
@@ -55,10 +55,6 @@ vmap <C-Left> xhP`[v`]
 " Fix it so quit and save will still work if if forget to let go of shift.
 nmap :Q :q
 nmap :W :w
-
-" Resize current window
-:au WinEnter * :set winfixheight
-:au WinEnter * :wincmd =
 
 "Commands to edit .vimrc
 nmap <leader>ev :e $MYVIMRC<CR>
@@ -140,27 +136,11 @@ filetype off
 syntax on
 filetype plugin indent on
 
-" show trailing whitespace
-function AddWhiteSpaceMarker()
-    let l:winview = winsaveview()
-    silent! %s/\v(\s+$)/\1¬
-    match ErrorMsg /\v\s+¬$/
-    call winrestview(l:winview)
-endfunction
 
-function RemoveWhiteSpaceMarker()
-    let l:winview = winsaveview()
-    silent! %s/\v(\s+)¬$/\1
-    call winrestview(l:winview)
-endfunction
-
-augroup Whitespace
+augroup WinWidth
     autocmd!
-    autocmd BufEnter * call AddWhiteSpaceMarker()
-    autocmd VimEnter * call AddWhiteSpaceMarker()
-    autocmd InsertLeave * call AddWhiteSpaceMarker()
-    autocmd BufWrite * call RemoveWhiteSpaceMarker()
-    autocmd BufWritePost * call AddWhiteSpaceMarker()
+    autocmd WinEnter * vertical resize +10
+    autocmd WinLeave * vertical resize -10
 augroup END
 
 
@@ -182,10 +162,8 @@ set wildignore+=*/coverage/*
 
 
 " Settings for python-mode
-map <Leader>g :call RopeGotoDefinition()<CR>
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
+let g:pymode_rope = 0
+let g:pymode_virtualenv = 1
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
