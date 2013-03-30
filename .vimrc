@@ -1,6 +1,8 @@
-python from powerline.bindings.vim import source_plugin; source_plugin()
+set encoding=utf-8
 
-
+" Cursor line highlight
+au InsertEnter * set cul
+au InsertLeave * set nocul
 
 " Scroll offset
 set scrolloff=5
@@ -22,6 +24,14 @@ let mapleader = ","
 
 " Fix Y
 map Y y$
+
+" Quick pair mappings
+nmap <leader>" i""<esc>i
+nmap <leader>( i()<esc>i
+nmap <leader>[ i[]<esc>i
+nmap <leader>{ i{}<esc>i
+nmap <leader>_ i____<esc>hi
+nmap <leader>' i''<esc>i
 
 " Bind nohl
 " Removes highlight of your last search
@@ -71,7 +81,7 @@ vnoremap > >gv " better indentation
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-color jellybeans
+color wombat256mod
 
 
 
@@ -123,11 +133,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Very magic swith for regular expressions, i.e. use perl syntax
-set magic
-
 " Spell Checking
-map <leader>ss :setlocal spell!<cr>
+set spelllang=en_gb
+nmap <leader>ss :setlocal spell!<cr>
+nmap <leader>p 1z=
 
 
 " Install any plugin into a .vim/bundle/plugin-name/ folder
@@ -137,18 +146,8 @@ syntax on
 filetype plugin indent on
 
 
-augroup WinWidth
-    autocmd!
-    autocmd WinEnter * vertical resize +10
-    autocmd WinLeave * vertical resize -10
-augroup END
-
 
 " =======================================================================
-
-
-" Settings for vim-powerline
-set laststatus=2
 
 
 " Settings for ctrlp
@@ -159,6 +158,7 @@ set wildignore+=*/htmlcov/*
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+set wildignore+=*build/*
 
 
 " Settings for python-mode
@@ -169,6 +169,26 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" Settings for vim-powerline
+set laststatus=2
+let g:Powerline_symbols = 'unicode'
+set fillchars+=stl:\ ,stlnc:\
+
+" Settings for jedi-vim
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#popup_on_dot = 1
+
+function! ShowDefWindow(action)
+    if pumvisible()
+        if a:action == 'show'
+            return ':let g:jedi#show_functon_definition = "1"'
+        endif
+    endif
+    return a:action
+endfunction
+
+inoremap <silent><C-d> <C-O>=ShowDefWindow('show')
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
